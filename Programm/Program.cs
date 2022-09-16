@@ -3,7 +3,7 @@
 либо задать на старте выполнения алгоритма. При решении не рекомендуется пользоваться коллекциями, 
 лучше обойтись исключительно массивами.*/
 
-void Function(string[] mass)
+string[] Function(string[] mass)
 {
     int countResult = 0;
     for (int i = 0; i < mass.Length; i++)
@@ -13,42 +13,45 @@ void Function(string[] mass)
             countResult++;
         }
     }
-
-    if (countResult == 0)
+    string[] resultArray = new string[countResult];
+    for (int i = 0, x = 0; i < mass.Length; i++)
     {
-        Console.WriteLine("Итоговый массив пуст: ");
-        Console.WriteLine($"[{string.Empty}]");
+        if (mass[i].Length <= 3)
+        {
+            resultArray[x] = mass[i];
+            x++;
+        }
+    }
+    return resultArray;
+}
+
+void VievStringArray(string[] mass)
+{
+    Console.WriteLine("Итоговый массив: ");
+    if (mass.Length == 0)
+    {
+        Console.Write($"[{string.Empty}]");
     }
     else
     {
-        string[] resultArray = new string[countResult];
-        for (int i = 0, x = 0; i < mass.Length; i++)
+        for (int i = 0; i < mass.Length; i++)
         {
-            if (mass[i].Length <= 3)
-            {
-                resultArray[x] = mass[i];
-                x++;
-            }
-        }
-        Console.WriteLine("Итоговый массив: ");
-        for (int i = 0; i < resultArray.Length; i++)
-        {
-            Console.Write($"\"{resultArray[i]}\"");
+            Console.Write($"\"{mass[i]}\"");
         }
     }
-
 }
 
-Console.Write("Введите количество строк в массиве ");
-int size = int.Parse(Console.ReadLine());
 
-Console.WriteLine("Введите последовательно строки массива ");
+    Console.Write("Введите количество строк в массиве ");
+    int size = int.Parse(Console.ReadLine());
 
-string[] array = new string[size];
-for (int i = 0; i < size; i++)
-{
-    Console.WriteLine($"Введите строку №{i}");
-    array[i] = Console.ReadLine();
-}
+    Console.WriteLine("Введите последовательно строки массива ");
 
-Function(array);
+    string[] array = new string[size];
+    for (int i = 0; i < size; i++)
+    {
+        Console.WriteLine($"Введите строку №{i}");
+        array[i] = Console.ReadLine();
+    }
+
+    VievStringArray(Function(array));
